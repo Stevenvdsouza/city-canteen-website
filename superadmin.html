@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - City Canteen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/superadmin.css">
+</head><body>
+
+  
+  <div class="modal-overlay" id="billModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🧾 Bill</h3>
+        <button class="modal-close" onclick="document.getElementById('billModal').classList.remove('open')">✕</button>
+      </div>
+      <div class="bill-body" id="billBody"></div>
+    </div>
+  </div>
+
+  
+  <div class="login-screen" id="loginScreen">
+    <div style="font-size:3rem;">🔐</div>
+    <h1>Admin Panel</h1>
+    <p>City Canteen — Super Admin Access</p>
+    <div class="login-box">
+      <div class="login-field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="admin" autocomplete="off">
+      </div>
+      <div class="login-field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">Sign In</button>
+      <div class="login-err" id="loginErr">Incorrect credentials. Try again.</div>
+    </div>
+  </div>
+
+  
+  <div id="adminApp" style="display:none;">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-circle">🍽️</div>
+        <h1>City Canteen — Admin Panel</h1>
+      </div>
+      <div class="header-right">Logged in as Admin</div>
+    </header>
+
+    <nav class="tabs">
+      <div class="tab active" onclick="switchTab('menu',this)">🍔 Menu</div>
+      <div class="tab" onclick="switchTab('orders-live',this)">📋 Live Orders</div>
+      <div class="tab" onclick="switchTab('reservations',this)">📅 Reservations</div>
+      <div class="tab" onclick="switchTab('codes',this)">👥 Staff Codes</div>
+      <div class="tab" onclick="switchTab('orders',this)">📦 All Orders</div>
+      <div class="tab" onclick="switchTab('report',this)">📊 Daily Report</div>
+    </nav>
+
+    <div class="content">
+
+      
+      <div class="panel active" id="panel-menu">
+        <div class="card">
+          <div class="card-header"><h2>Add New Item</h2></div>
+          <div class="add-form">
+            <div><label>Item Name *</label><input type="text" id="newName"></div>
+            <div><label>Price (₹) *</label><input type="number" id="newPrice" min="1"></div>
+            <div>
+              <label>Category *</label>
+              <select id="newCategory">
+                <option value="burgers">Burgers</option>
+                <option value="pizza">Pizza</option>
+                <option value="noodles">Noodles</option>
+                <option value="fries">Fries</option>
+                <option value="wings">Wings</option>
+                <option value="beverages">Beverages</option>
+              </select>
+            </div>
+            <div><label>Image URL</label><input type="url" id="newImage"></div>
+            <div class="full"><label>Description</label><input type="text" id="newDesc"></div>
+            <div class="full"><button class="add-btn-form" onclick="addMenuItem()">+ Add to Menu</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>All Menu Items</h2><button class="refresh-btn" onclick="loadMenuItems()">↻ Refresh</button></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Available</th><th>Delete</th></tr></thead>
+              <tbody id="menuTableBody"><tr><td colspan="6" class="empty-note">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="panel" id="panel-reservations">
+        <div class="card">
+          <div class="card-header"><h2>Table Reservations</h2><button class="refresh-btn" onclick="loadReservations()">↻ Refresh</button></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Contact</th><th>Date</th><th>Time</th><th>Guests</th><th>Note</th><th>Delete</th></tr></thead>
+              <tbody id="resTableBody"><tr><td colspan="7" class="empty-note">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="panel" id="panel-codes">
+        <div class="card">
+          <div class="card-header"><h2>Staff Access Codes</h2><button class="refresh-btn" onclick="loadCodes()">↻ Refresh</button></div>
+          <div class="codes-grid" id="codesGrid"><div class="empty-note">Loading…</div></div>
+          <div class="add-code-form">
+            <input type="text" id="newCodeVal" maxlength="10">
+            <input type="text" id="newCodeLabel">
+            <button class="add-code-btn" onclick="addCode()">+ Add Code</button>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="panel" id="panel-orders-live">
+        <div class="card">
+          <div class="card-header"><h2>Live Orders</h2><button class="refresh-btn" onclick="loadLiveOrders()">↻ Refresh</button></div>
+          <div id="adminLiveOrdersList"><div class="empty-note">Loading…</div></div>
+        </div>
+      </div>
+
+      
+      <div class="panel" id="panel-orders">
+        <div class="card">
+          <div class="card-header"><h2>All Orders</h2><button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>#</th><th>Customer</th><th>Phone</th><th>Table</th><th>Items</th><th>Total</th><th>Status</th><th>Time</th><th>Bill</th></tr></thead>
+              <tbody id="ordersTableBody"><tr><td colspan="9" class="empty-note">No Orders</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="panel" id="panel-report">
+        <div class="card">
+          <div class="card-header"><h2>Daily Report</h2><button class="refresh-btn" onclick="loadAdminDailyReport()">↻ Refresh</button></div>
+          <div id="adminDailyReportSection"><div class="empty-note">Loading…</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/superadmin.js"></script>
+</body>
+</html>

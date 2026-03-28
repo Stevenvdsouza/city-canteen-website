@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Canteen - Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/cart-utils.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-circle">
+          <span class="logo-icon">🍽️</span>
+        </div>
+        <span class="logo-text">City Canteen</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="opening-hours.html" class="nav-link">Table Reservations</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-wrap" id="searchWrap">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input class="search-input" id="searchInput" type="text" placeholder="Search dishes…" autocomplete="off">
+          <button class="search-clear" id="searchClear" style="display:none;">✕</button>
+          <div class="search-results" id="searchResults" style="display:none;"></div>
+        </div>
+
+        <a href="cart.html" class="cart-btn" id="cartBtn" style="text-decoration:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+        
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <div class="announce-bar">
+    🔥 Try our new <strong>Chicken Ghee Roast Burger</strong> &nbsp;|&nbsp; Open daily 10am – 10pm &nbsp;|&nbsp; <a href="opening-hours.html">Reserve a table →</a>
+  </div>
+
+  
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-backdrop" id="navBackdrop"></div>
+    <div class="mobile-nav-drawer">
+      <button class="mobile-nav-close" id="navClose">✕</button>
+      <a href="#" class="mobile-nav-link active">🏠 Home</a>
+      <a href="#" class="mobile-nav-link">🍽️ Menu</a>
+      <a href="opening-hours.html" class="mobile-nav-link">📅 Table Reservations</a>
+      <a href="burgers.html" class="mobile-nav-link">🍔 Burgers</a>
+      <a href="pizza.html" class="mobile-nav-link">🍕 Pizza</a>
+      <a href="noodles.html" class="mobile-nav-link">🍜 Noodles</a>
+      <a href="fries.html" class="mobile-nav-link">🥗 Fries</a>
+      <a href="wings.html" class="mobile-nav-link">🍰 Wings</a>
+      <a href="beve.html" class="mobile-nav-link">🥤 Beverages</a>
+      <a href="#" class="mobile-nav-link">ℹ️ About</a>
+      <a href="#" class="mobile-nav-link">📞 Contact</a>
+    </div>
+  </div>
+
+  
+  <main class="main-content">
+    
+    <aside class="sidebar">
+
+      
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Main Dishes</h3>
+        <ul class="category-list" id="categoryList">
+          <li class="category-item active" data-cat="burgers"><span>Burgers</span></li>
+          <li class="category-item" data-cat="pizza"><span>Pizza</span></li>
+          <li class="category-item" data-cat="rolls"><span>Rolls</span></li>
+          <li class="category-item" data-cat="sandwich"><span>Sandwich</span></li>
+          <li class="category-item" data-cat="momos"><span>Momos</span></li>
+          <li class="category-item" data-cat="maggi"><span>Maggi</span></li>
+          <li class="category-item" data-cat="egg"><span>Egg</span></li>
+          <li class="category-item" data-cat="breakfast"><span>Breakfast</span></li>
+        </ul>
+      </div>
+
+    
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Snacks & Starters</h3>
+        <ul class="category-list category-list-extra">
+          <li class="category-item" data-cat="starters"><span>Starters</span></li>
+          <li class="category-item" data-cat="chicken_wings"><span>Chicken Wings</span></li>
+          <li class="category-item" data-cat="garlic_bread"><span>Garlic Bread</span></li>
+          <li class="category-item" data-cat="fries"><span>Fries</span></li>
+          <li class="category-item" data-cat="nachos"><span>Nachos</span></li>
+          <li class="category-item" data-cat="squid"><span>Squid</span></li>
+          <li class="category-item" data-cat="soups"><span>Soups</span></li>
+          <li class="category-item" data-cat="salads"><span>Salads</span></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Drinks</h3>
+        <ul class="category-list category-list-extra">
+          <li class="category-item" data-cat="mojito"><span>Mojito</span></li>
+          <li class="category-item" data-cat="milkshakes"><span>Milkshakes</span></li>
+          <li class="category-item" data-cat="fruit_juice"><span>Fruit Juice</span></li>
+          <li class="category-item" data-cat="iced_tea"><span>Iced Tea</span></li>
+          <li class="category-item" data-cat="beverages"><span>Beverages</span></li>
+          <li class="category-item" data-cat="noodles"><span>Noodles</span></li>
+          <li class="category-item" data-cat="wings"><span>Wings</span></li>
+        </ul>
+      </div>
+
+      
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">Desserts</h3>
+        <ul class="category-list category-list-extra">
+          <li class="category-item" data-cat="dessert"><span>Dessert</span></li>
+        </ul>
+      </div>
+
+    </aside>
+
+
+
+  
+    <section class="products-section">
+      <div class="section-header">
+        <h2 class="section-title" id="sectionTitle">All Items</h2>
+        <span style="font-size:.82rem;color:var(--gray-400);" id="itemCountLabel"></span>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <div style="grid-column:1/-1;padding:3rem;text-align:center;color:#9ca3af;">Loading menu…</div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-logo">
+          <div class="logo-circle">
+            <span class="logo-icon">🍽️</span>
+          </div>
+          <span class="logo-text">City Canteen</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Contact Us</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Anagundi Bejai kapikad</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+91 8296259552</span>
+          </li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span>sappu7151@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/index.js"></script>
+</body>
+</html>

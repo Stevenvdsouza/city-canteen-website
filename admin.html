@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Panel - City Canteen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head><body>
+
+  
+  <div class="modal-overlay" id="billModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🧾 Bill</h3>
+        <button class="modal-close" onclick="document.getElementById('billModal').classList.remove('open')">✕</button>
+      </div>
+      <div class="bill-body" id="billBody"></div>
+    </div>
+  </div>
+
+  
+  <div class="modal-overlay" id="reportModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📊 Daily Report</h3>
+        <button class="modal-close" onclick="document.getElementById('reportModal').classList.remove('open')">✕</button>
+      </div>
+      <div class="bill-body" id="reportBody"></div>
+    </div>
+  </div>
+
+ 
+  <div class="pin-screen" id="pinScreen">
+    <div style="font-size:3rem;">🍽️</div>
+    <h1>Staff Panel</h1>
+    <p>Enter your staff access code to continue</p>
+    <input class="pin-input" type="password" id="pinInput" maxlength="10" oninput="if(this.value.length>=4) checkPin()">
+    <button class="pin-btn" onclick="checkPin()">Enter</button>
+    <div class="pin-err" id="pinErr">Invalid code. Please try again.</div>
+  </div>
+
+  
+  <div id="staffApp" style="display:none;">
+    <header class="header">
+      <div class="header-left">
+        <div class="logo-circle">🍽️</div>
+        <h1>City Canteen — Staff Panel</h1>
+      </div>
+      <div class="header-right">
+        <span class="call-alert-badge" id="globalCallBadge">🔔 Call Staff!</span>
+        <button onclick="showDailyReport()" style="background:#f97316;color:#fff;border:none;border-radius:8px;padding:.45rem 1rem;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;">📊 Daily Report</button>
+        <span>Auto-refreshing</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="section-title">📋 Live Orders</div>
+      <div class="orders-grid" id="ordersList">
+        <div class="empty-note">Loading orders…</div>
+      </div>
+
+      
+      <div style="margin-top:2rem;">
+        <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <span>📅 Table Reservations</span>
+          <button onclick="loadReservations()" style="background:var(--primary,#f97316);color:#fff;border:none;border-radius:8px;padding:.35rem .9rem;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;">🔄 Refresh</button>
+        </div>
+        <div style="background:#fff;border-radius:12px;border:1px solid #e5e7eb;overflow:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:.85rem;font-family:inherit;">
+            <thead>
+              <tr style="background:#f9fafb;">
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Name</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Contact</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Date</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Time</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Guests</th>
+                <th style="padding:.65rem 1rem;text-align:left;font-size:.75rem;color:#6b7280;font-weight:600;border-bottom:1px solid #e5e7eb;">Note</th>
+              </tr>
+            </thead>
+            <tbody id="staffResTableBody">
+              <tr><td colspan="6" style="padding:1rem;text-align:center;color:#9ca3af;">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div style="margin-top:2rem;">
+        <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <span>📊 Today's Report</span>
+          <button onclick="loadDailyReport()" style="background:var(--primary,#f97316);color:#fff;border:none;border-radius:8px;padding:.35rem .9rem;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;">🔄 Refresh</button>
+        </div>
+        <div id="dailyReportSection">
+          <div class="empty-note">Loading report…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
