@@ -116,7 +116,7 @@ searchInput.addEventListener('input', () => {
   searchClear.style.display = q ? 'flex' : 'none';
   if (!q) { searchResults.style.display = 'none'; return; }
 
-  const matches = allMenuItems.filter(i => i.available && i.name.toLowerCase().includes(q));
+  const matches = allMenuItems.filter(i => i.name.toLowerCase().includes(q));
   if (!matches.length) {
     searchResults.innerHTML = '<div class="sr-empty">No dishes found for "' + searchInput.value + '"</div>';
   } else {
