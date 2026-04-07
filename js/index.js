@@ -109,7 +109,7 @@ const searchInput   = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
 const searchClear   = document.getElementById('searchClear');
 
-fetch('/api/menu').then(r => r.json()).then(data => { allMenuItems = data; }).catch(() => {});
+fetch('./menu.json').then(r => r.json()).then(data => { allMenuItems = data; }).catch(() => {});
 
 searchInput.addEventListener('input', () => {
   const q = searchInput.value.trim().toLowerCase();
